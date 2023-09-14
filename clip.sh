@@ -1,21 +1,24 @@
 #!/bin/bash
+# arguments:
 # 1 timestamp
 # 2 timestamp
 # 3 file
 # 4 logo file
 # 5 logo file
-# 6 team color (not implemented)
-# 7 team color (not implemented)
+# 6 team color 
+# 7 team color 
 # 8 team
 # 9 team
 # 10 score
 # 11 score
 # 12 output file
-ffmpeg -ss $1 -to $2 -i $3 -i $4 -i $5 -filter_complex \
+ffmpeg -ss ${1} -to ${2} -i ${3} -i ${4} -i ${5} -filter_complex \
 	"[0]drawbox=x=(3*iw)/80:y=(3*iw)/80:w=iw/10:h=iw/20:c=Black:t=fill, \
 	    drawbox=x=(3*iw)/80+iw/10:y=(3*iw)/80:w=iw/40:h=iw/20:c=White:t=fill, \
-	    drawtext=text=$8:x=(3*W)/80+W/240+W/40:y=(3*W)/80+W/80-th/2:fontsize=W/80:fontcolor=White:fontfile=bin/DejaVuSans-Bold.ttf, \
-	    drawtext=text=$9:x=(3*W)/80+W/240+W/40:y=(3*W)/80+W/40+W/80-th/2:fontsize=W/80:fontcolor=White:fontfile=bin/DejaVuSans-Bold.ttf, \
+		drawbox=x=(3*iw)/80-(iw/320):y=(3*iw)/80:w=iw/320:h=iw/40:c=${6}:t=fill, \
+		drawbox=x=(3*iw)/80-(iw/320):y=(3*iw)/80+iw/40:w=iw/320:h=iw/40:c=${7}:t=fill, \
+	    drawtext=text=${8}:x=(3*W)/80+W/240+W/40:y=(3*W)/80+W/80-th/2:fontsize=W/80:fontcolor=White:fontfile=bin/DejaVuSans-Bold.ttf, \
+	    drawtext=text=${9}:x=(3*W)/80+W/240+W/40:y=(3*W)/80+W/40+W/80-th/2:fontsize=W/80:fontcolor=White:fontfile=bin/DejaVuSans-Bold.ttf, \
 	    drawtext=text=${10}:x=((3*W)/80+W/10)+(W/40-tw)/2:y=(3*W)/80+W/80-th/2:fontsize=W/80:fontcolor=Red:fontfile=bin/DejaVuSans-Bold.ttf, \
 	    drawtext=text=${11}:x=((3*W)/80+W/10)+(W/40-tw)/2:y=(3*W)/80+W/40+W/80-th/2:fontsize=W/80:fontcolor=Red:fontfile=bin/DejaVuSans-Bold.ttf[0_text]; \
 	 [1][0_text]scale2ref=w=iw/60:h=iw/60[ol1][0_text1]; \
